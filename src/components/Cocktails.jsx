@@ -1,6 +1,7 @@
 import { cocktailLists, mockTailLists } from '../../constants'
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
+import CocktailCard from './CocktailCard'
 
 const Cocktails = () => {
   useGSAP(() => {
@@ -27,39 +28,24 @@ const Cocktails = () => {
       <img src="/images/cocktail-left-leaf.png" alt='l-leaf' id="c-left-leaf"></img>
       <img src="/images/cocktail-right-leaf.png" alt='r-leaf' id="c-right-leaf"></img>
 
-      <div className='list'>
-        <div className='popular'>
+      <div className='cocktails-container'>
+        <div className='popular-cocktails'>
           <h2>Most Popular Cocktails:</h2>
-
-          <ul>
-            {cocktailLists.map(({name, country, detail, price}) => (
-              <li key={name}>
-                <div className='md:me-28'>
-                  <h3>{name}</h3>
-                  <p>{country} | {detail}</p>
-                </div>
-                <span>- {price}</span>
-              </li>
+          <div className='cocktails-grid'>
+            {cocktailLists.map((cocktail) => (
+              <CocktailCard key={cocktail.name} {...cocktail} />
             ))}
-          </ul>
+          </div>
         </div>
 
-        <div className='loved'>
+        <div className='popular-mocktails'>
           <h2>Most Loved Mocktails:</h2>
-
-          <ul>
-            {mockTailLists.map(({name, country, detail, price}) => (
-              <li key={name}>
-                <div className='me-28'>
-                  <h3>{name}</h3>
-                  <p>{country} | {detail}</p>
-                </div>
-                <span>- {price}</span>
-              </li>
+          <div className='cocktails-grid'>
+            {mockTailLists.map((mocktail) => (
+              <CocktailCard key={mocktail.name} {...mocktail} />
             ))}
-          </ul>
+          </div>
         </div>
-
       </div>
     </section>
   )
